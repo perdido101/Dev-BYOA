@@ -1,12 +1,12 @@
 :root {
-  --primary: #f6b15c;    /* Brighter purple */
+  --primary: #f65c64;    /* Light red */
   --secondary: #34D399;  /* Brighter green */
   --dark: #0F172A;      /* Darker background */
   --light: #FFFFFF;     /* Pure white */
   --gray: #E2E8F0;      /* Light gray */
   --text-dark: #1E293B; /* Dark text */
   --accent: #F59E0B;    /* Brighter orange */
-  --danger: #EF4444;    /* Brighter red */
+  --danger: #ef4444;    /* Brighter red */
   --gradient: linear-gradient(135deg, #8B5CF6, #A78BFA);
   --container-padding: clamp(1.5rem, 5vw, 2.5rem);
   --border-radius: 16px;
