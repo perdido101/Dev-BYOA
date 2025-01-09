@@ -1,0 +1,375 @@
+:root {
+  --primary: #8B5CF6;    /* Brighter purple */
+  --secondary: #34D399;  /* Brighter green */
+  --dark: #0F172A;      /* Darker background */
+  --light: #FFFFFF;     /* Pure white */
+  --gray: #E2E8F0;      /* Light gray */
+  --text-dark: #1E293B; /* Dark text */
+  --accent: #F59E0B;    /* Brighter orange */
+  --danger: #EF4444;    /* Brighter red */
+  --gradient: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  --container-padding: clamp(1.5rem, 5vw, 2.5rem);
+  --border-radius: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: var(--dark);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--light);
+  line-height: 1.5;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--border-radius);
+  padding: var(--container-padding);
+  width: min(90%, 480px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.timer {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -2px;
+  margin: 1rem 0;
+}
+
+.timer span {
+  display: inline-block;
+  min-width: 100px;
+}
+
+.controls {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+button {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+#start {
+  background: var(--gradient);
+  color: var(--light);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+#pause {
+  background: var(--gray);
+  color: var(--text-dark);
+  box-shadow: 0 4px 15px rgba(226, 232, 240, 0.3);
+}
+
+#reset {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--light);
+  border: 2px solid var(--gray);
+}
+
+.mode-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#work-mode, #break-mode {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light);
+  opacity: 0.7;
+}
+
+#work-mode.active {
+  background: var(--primary);
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+#break-mode.active {
+  background: var(--secondary);
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.stickman-container {
+    position: relative;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.speech-bubble {
+    position: relative;
+    margin-left: 90px;
+    background: var(--light);
+    color: var(--text-dark);
+    padding: 12px 20px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    max-width: 200px;
+    z-index: 1;
+}
+
+/* Speech bubble triangle */
+.speech-bubble:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent var(--light) transparent transparent;
+}
+
+.stickman {
+    position: absolute;
+    left: 40px;
+    top: 10px;
+    transform-origin: center;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.head {
+    width: 25px;
+    height: 25px;
+    border: 3px solid var(--light);
+    border-radius: 50%;
+    position: relative;
+}
+
+.head::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--light);
+    border-radius: 50%;
+    top: 8px;
+    left: 8px;
+    box-shadow: 6px 0 0 var(--light);
+}
+
+.head::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--light);
+    border-radius: 50%;
+    border-top-color: transparent;
+    bottom: 2px;
+    left: 6px;
+    transform: rotate(15deg);
+}
+
+.body {
+    width: 2px;
+    height: 40px;
+    background: var(--light);
+    position: absolute;
+    left: 9px;
+    top: 20px;
+}
+
+.arm-left, .arm-right {
+    width: 2px;
+    height: 20px;
+    background: var(--light);
+    position: absolute;
+    top: 25px;
+}
+
+.arm-left {
+    left: 9px;
+    transform: rotate(45deg);
+}
+
+.arm-right {
+    left: 9px;
+    transform: rotate(-45deg);
+}
+
+.leg-left, .leg-right {
+    width: 2px;
+    height: 20px;
+    background: var(--light);
+    position: absolute;
+    top: 60px;
+}
+
+.leg-left {
+    left: 9px;
+    transform: rotate(20deg);
+}
+
+.leg-right {
+    left: 9px;
+    transform: rotate(-20deg);
+}
+
+#speed-up {
+    background: var(--accent);
+    color: var(--text-dark);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+} 
+
+.speed-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.speed-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--light);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.speed-btn.active {
+  opacity: 1;
+  background: var(--gradient);
+}
+
+.speed-btn[data-speed="2"].active {
+  background: linear-gradient(135deg, var(--accent), #FBBF24);
+}
+
+.speed-btn[data-speed="3"].active {
+  background: linear-gradient(135deg, var(--danger), #F87171);
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+} 
+
+/* New emoji face styles */
+.face-container {
+  position: relative;
+  min-height: 120px;
+  display: grid;
+  place-items: center start;
+  padding-left: 20px;
+  margin-bottom: 2rem;
+}
+
+.face {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 60px;
+  height: 60px;
+  background: #FFD93D;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(255, 217, 61, 0.3);
+}
+
+.eyes {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.eye {
+  width: 8px;
+  height: 8px;
+  background: var(--text-dark);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 15px;
+  border: 3px solid var(--text-dark);
+  border-radius: 0 0 30px 30px;
+  border-top: 0;
+  transition: all 0.3s ease;
+} 
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  button, .face, .speech-bubble {
+    transition: none;
+  }
+} 
+
+/* Face expressions */
+.face.yelling .mouth {
+    height: 20px;
+    width: 25px;
+    border-radius: 50%;
+    background: var(--text-dark);
+    border: none;
+    bottom: 12px;
+}
+
+.face.yelling .eye {
+    transform: scaleY(1.2);
+} 
